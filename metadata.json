@@ -1,0 +1,6 @@
+{
+  "name": "FORGE Brain Copilot",
+  "description": "AI-copilot fitness app where an AI fitness intelligence proposes workout and schedule changes for user approval with optimistic concurrency control and reversible audit logs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

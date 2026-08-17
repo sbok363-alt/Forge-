@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing basic info, goals, and experience.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "age": { "type": "number" },
+        "sex": { "type": "string", "enum": ["male", "female", "other"] },
+        "height": { "type": "number" },
+        "weight": { "type": "number" },
+        "experience": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+        "goals": { "type": "array" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "createdAt", "updatedAt"]
+    },
+    "trainingPlan": {
+      "title": "TrainingPlan",
+      "description": "A user's training plan containing workouts and exercises.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "goal": { "type": "string", "maxLength": 100 },
+        "weeklyFrequency": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "days": { "type": "array" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "name", "isActive", "createdAt", "updatedAt"]
+    },
+    "workout": {
+      "title": "Workout",
+      "description": "An actual workout session logged by the user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "planId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["in-progress", "completed"] },
+        "startedAt": { "type": "number" },
+        "completedAt": { "type": "number" },
+        "exercises": { "type": "array" }
+      },
+      "required": ["userId", "name", "status", "startedAt"]
+    },
+    "bodyweightEntry": {
+      "title": "BodyweightEntry",
+      "description": "A bodyweight log entry for progress tracking.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "weight": { "type": "number" },
+        "date": { "type": "number" }
+      },
+      "required": ["userId", "weight", "date"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/userProfile" },
+      "description": "User profile document."
+    },
+    "plans/{planId}": {
+      "schema": { "$ref": "#/entities/trainingPlan" },
+      "description": "User training plans."
+    },
+    "workouts/{workoutId}": {
+      "schema": { "$ref": "#/entities/workout" },
+      "description": "User workout logs."
+    },
+    "bodyweight/{entryId}": {
+      "schema": { "$ref": "#/entities/bodyweightEntry" },
+      "description": "User bodyweight log entries."
+    }
+  }
+}
